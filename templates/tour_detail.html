@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block content %}
+    <main>
+        <section id="product-detail">
+            <div class="container">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="product-details-title">{{ tour_inside.title }}</div>
+                        <div class="product-price">{{ tour_inside.price }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="product-detail-left">
+                            <div class="swiper mySwiper2">
+                                <div class="swiper-wrapper">
+                                    {% for img in tour_inside.tourimage_set.all %}
+                                        <div class="swiper-slide">
+                                            <img src="{{ img.image.url }}"
+                                                 alt="">
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 mt-4 mt-lg-0">
+                        <div class="product-detail-right">
+                            <div class="product-details">
+                                <div class="product-options">
+                                    <form method="post">
+                                        {% csrf_token %}
+
+                                        <div class="form-group  product-option-select">
+                                            <label name="user" class="control-label" for="name">Ad, Soyad</label>
+                                            {{ form.user }}
+                                        </div>
+
+                                        <div class="form-group  product-option-select">
+                                            <label name="email" class="control-label" for="email">Email</label>
+                                            {{ form.email }}
+                                        </div>
+                                        <div class="form-group  product-option-select">
+                                            <label name="phone" class="control-label" for="number">Telefon
+                                                nömmrəsi</label>
+                                            {{ form.phone }}
+                                        </div>
+
+                                        <div class="form-group product-option-date">
+                                            <label name="date" class="control-label" for="date">Tur Tarihi</label>
+                                            {{ form.date }}                                        </div>
+
+                                        <div class="form-group  product-option-select">
+                                            <label name="adult" class="control-label" for="adult">Yetişkin</label>
+                                            {{ form.adult }}
+                                        </div>
+
+                                        <div class="form-group  product-option-select">
+                                            <label name="child" class="control-label" for="older-child">Çocuk
+                                                2-12</label>
+                                            {{ form.child }}
+                                        </div>
+
+                                        <div class="form-group  product-option-select">
+                                            <label name="baby" class="control-label" for="little-child">Çocuk
+                                                0-2</label>
+                                            {{ form.baby }}
+                                        </div>
+                                        <button type="submit" class="booking-btn">Hızlı Rezervasyon</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end">
+                    <div class="col-lg-5 col-12">
+                        <div class="contact-box mt-3">
+                            <p class="contact-caption">
+                                İstəyirsinizsə, telefonla sifarişinizi tamamlaya bilərsiniz. </p>
+                            <a class="call-btn" href="tel:{{ contact_info.phone }}">
+                                <i class="fas fa-headset"></i>
+                                {{ contact_info.phone }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="check-editor">
+            <div class="container">
+                <div class="col-12">
+
+                    <h2>Ətraflı məlumat:</h2>
+                    <div>
+                        {{ tour_inside.content|safe }}
+
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+        <section id="tour-list">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="all-tours">
+                            <h2>
+                                ŞUNLARI DA BEĞENEBİLİRSİNİZ</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    {% for blog in rest %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+                            <a href="" class="tour-box">
+                                <div class="tour-img">
+                                    <img src="{{ blog.image.url }}"
+                                         alt="">
+                                </div>
+                                <div class="caption">
+                                    <h3 class="tour-name">
+                                        {{ blog.title }}
+                                    </h3>
+                                    <div class="tour-footer">
+                                        <div class="tour-date">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            O Sa Cu
+                                        </div>
+                                        <div class="tour-price">
+                                            {{ blog.price }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </section>
+    </main>
+{% endblock %}

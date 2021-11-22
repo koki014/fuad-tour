@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+    <main>
+        <section id="banner">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    {% for photo in sliders %}
+
+                        <div class="swiper-slide">
+                            <img src="{{ photo.image.url }}" alt="">
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <section id="tour-list">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="all-tours">
+                            <h2>
+                                TÜM TURLAR</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    {% for tur in sow_tur %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+                            <a href="{% url 'tour_detail' tur.id %}" class="tour-box">
+                                <div class="tour-img">
+                                    <img src="{{ tur.image.url }}"
+                                         alt="">
+                                </div>
+                                <div class="caption">
+                                    <h3 class="tour-name">
+                                        {{ tur.title }}
+                                    </h3>
+                                    <div class="tour-footer">
+                                        <div class="tour-date">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            O Sa Cu
+                                        </div>
+                                        <div class="tour-price">
+                                            {{ tur.price }}                                    </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <div class="sercices-content">
+                    <div class="row">
+                        <div class="col-lg-5 mb-lg-0 mb-4">
+                            <div class="service-direction">
+                                <h2>{{ service.title }}</h2>
+                                <p>{{ service.text }}</p>
+                                <a href="{{ service.button_url }}">
+                                    {{ service.button_text }}
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-12">
+                            <div class="row">
+                                {% for block in info_block %}
+                                    <div class="col-lg-4 mb-lg-0 mb-4">
+                                        <div class="info-block">
+                                            <div class="info-block-content">
+                                                <div class="info-block-icon">
+                                                    <i class="fas fa-lock"></i>
+                                                </div>
+                                                <div class="info-block-title">{{ block.title }}</div>
+                                                <div class="info-block-text">{{ block.text }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,7 @@
+location /static/ {
+    alias /tour/static/;
+}
+
+location /media/ {
+    alias /tour/media/;
+}

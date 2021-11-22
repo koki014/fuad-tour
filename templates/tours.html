@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <main>
+        <section id="tour-list">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="all-tours">
+                            <h2>
+                                {{ country.name }}
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    {% for b in tours %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+                            <a href="{% url 'tour_detail' b.id %}" class="tour-box">
+                                <div class="tour-img">
+                                    <img src="{{ b.image.url }}"
+                                         alt="">
+                                </div>
+                                <div class="caption">
+                                    <h3 class="tour-name">{{ b.title }}</h3>
+                                    <div class="tour-footer">
+                                        <div class="tour-date">
+
+                                            <i class="fas fa-calendar-alt"></i>
+                                            {% for tour in tours %}
+                                                {% for day in tour.days.all %}
+                                                    {{ day.name }}
+                                                {% endfor %}
+                                            {% endfor %}
+
+                                        </div>
+                                        <div class="tour-price">{{ b.price }}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </section>
+    </main>
+{% endblock %}
